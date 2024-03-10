@@ -55,6 +55,9 @@
                                         <state key="normal" title="False" backgroundImage="Rectangle">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KKE-zS-FpW"/>
+                                        </connections>
                                     </button>
                                     <progressView opaque="NO" contentMode="scaleToFill" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TXm-qh-7Xg">
                                         <rect key="frame" x="0.0" y="804" width="374" height="11"/>
@@ -82,7 +85,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="falseButton" destination="tbn-vQ-GyC" id="a6k-xb-sz3"/>
+                        <outlet property="progressViewBar" destination="TXm-qh-7Xg" id="1MT-a7-kOZ"/>
                         <outlet property="questionLabel" destination="rSI-li-mhO" id="Ysg-At-Rc4"/>
+                        <outlet property="trueButton" destination="oVw-Hl-IRe" id="piF-sS-i7g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
