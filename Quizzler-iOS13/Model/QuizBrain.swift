@@ -1,13 +1,13 @@
 //
-//  ViewController.swift
+//  QuizBrain.swift
 //  Quizzler-iOS13
 //
-//  Created by Angela Yu on 12/07/2019.
-//  Copyright © 2019 The App Brewery. All rights reserved.
+//  Created by HOA on 11.03.2024.
+//  Copyright © 2024 The App Brewery. All rights reserved.
 //
 
-import UIKit
-class ViewController: UIViewController {
+import Foundation
+struct QuizBrain {
     let quiz = [
         Question(q: "A slug's blood is green.", a: "True"),
                 Question(q: "Approximately one quarter of human bones are in the feet.", a: "True"),
@@ -23,40 +23,7 @@ class ViewController: UIViewController {
                 Question(q: "Chocolate affects a dog's heart and nervous system; a few ounces are enough to kill a small dog.", a: "True")
 
     ]
-    var questionNumber = 0
-    @IBOutlet weak var progressViewBar: UIProgressView!
-    @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var trueButton: UIButton!
-    @IBOutlet weak var falseButton: UIButton!
-    
-    @IBAction func answerButtonPressed(_ sender: UIButton) {
-        let userAnswer = sender.currentTitle
-        let actualAnswer = quiz[questionNumber].answer
-        if userAnswer == actualAnswer {
-            print("correct")
-            sender.backgroundColor = UIColor.green
-        } else {
-            print("wrong")
-            sender.backgroundColor = UIColor.red
-        }
-        if questionNumber + 1 < quiz.count {
-            questionNumber += 1
-        } else {
-            questionNumber = 0
-        }
-        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
+    func checkAnswer(inputAnswer userAnswer: String, correctAnswer actualAnswer: String) -> Bool {
+        return userAnswer == actualAnswer
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateUI()
-    }
-    @objc func updateUI() {
-        progressViewBar.progress = Float(questionNumber + 1) / Float(quiz.count)
-        self.trueButton.backgroundColor = UIColor.clear
-        self.falseButton.backgroundColor = UIColor.clear
-        questionLabel.text = quiz[questionNumber].text
-    }
-
-
 }
-
