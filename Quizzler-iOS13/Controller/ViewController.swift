@@ -12,21 +12,24 @@ class ViewController: UIViewController {
     var questionNumber = 0
     @IBOutlet weak var progressViewBar: UIProgressView!
     @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var trueButton: UIButton!
-    @IBOutlet weak var falseButton: UIButton!
-    let quizBrain = QuizBrain();
+    @IBOutlet weak var option1: UIButton!
+    @IBOutlet weak var option2: UIButton!
+    @IBOutlet weak var option3: UIButton!
+    @IBOutlet weak var scoreLabel: UILabel!
+    
+    var quizBrain = QuizBrain();
 
     @IBAction func answerButtonPressed(_ sender: UIButton) {
         let userAnswer = sender.currentTitle
-        let actualAnswer = quizBrain.quiz[questionNumber].answer
-        if quizBrain.checkAnswer(inputAnswer: userAnswer ?? "", correctAnswer: actualAnswer ) {
+        let userGotItRight = quizBrain.checkAnswer(inputAnswer: userAnswer ?? "")
+        if userGotItRight {
             print("correct")
             sender.backgroundColor = UIColor.green
         } else {
             print("wrong")
             sender.backgroundColor = UIColor.red
         }
-
+        quizBrain.nextQuestion()
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
     }
     override func viewDidLoad() {
@@ -34,10 +37,16 @@ class ViewController: UIViewController {
         updateUI()
     }
     @objc func updateUI() {
+        let answerChoices = quizBrain.getAnswers()
+        option1.setTitle(answerChoices[0], for: .normal)
+        option2.setTitle(answerChoices[1], for: .normal)
+        option3.setTitle(answerChoices[2], for: .normal)
         progressViewBar.progress = quizBrain.getProgress()
-        self.trueButton.backgroundColor = UIColor.clear
-        self.falseButton.backgroundColor = UIColor.clear
+        self.option1.backgroundColor = UIColor.clear
+        self.option2.backgroundColor = UIColor.clear
+        self.option3.backgroundColor = UIColor.clear
         questionLabel.text = quizBrain.getText()
+        scoreLabel.text = "Score: \(quizBrain.getScore())"
     }
 
 
