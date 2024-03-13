@@ -23,7 +23,22 @@ struct QuizBrain {
                 Question(q: "Chocolate affects a dog's heart and nervous system; a few ounces are enough to kill a small dog.", a: "True")
 
     ]
+    var questionNumber = 0
     func checkAnswer(inputAnswer userAnswer: String, correctAnswer actualAnswer: String) -> Bool {
         return userAnswer == actualAnswer
     }
+    func getProgress() -> Float {
+        return Float(questionNumber + 1)/Float(quiz.count)
+    }
+    func getText() -> String {
+        return quiz[questionNumber].text
+    }
+    mutating func nextQuestion () {
+        if questionNumber + 1 < quiz.count {
+            questionNumber += 1
+        } else {
+            questionNumber = 0
+        }
+    }
+
 }
